@@ -132,7 +132,7 @@ struct DeliveryLocation: View {
                 .foregroundColor(.black)
                 .font(.system(size: 18))
                 .bold()
-            
+            Spacer()
             HStack {
                 Image("Delivery1")
                 
@@ -143,6 +143,7 @@ struct DeliveryLocation: View {
                         .foregroundColor(.black)
                         .font(.system(size: 16))
                         .bold()
+                    
                 }
             }
             Rectangle()
@@ -151,6 +152,7 @@ struct DeliveryLocation: View {
                 .padding(.all)
             
             VStack(alignment: .leading, spacing: 10) {
+                Spacer()
                 HStack {
                     Image("Delivery2")
                     Button(action: {
@@ -162,6 +164,7 @@ struct DeliveryLocation: View {
                             .bold()
                     }
                 }
+                Spacer()
                 Rectangle()
                     .frame(width: 351, height: 1)
                     .foregroundColor(.gray)
@@ -172,7 +175,7 @@ struct DeliveryLocation: View {
                     .foregroundColor(.black)
                     .font(.system(size: 18))
                     .bold()
-                
+                Spacer()
                 HStack {
                     Image(systemName: "house")
                     Button(action: {
@@ -183,7 +186,7 @@ struct DeliveryLocation: View {
                             .font(.system(size: 16))
                             .bold()
                     }
-                   
+                    Spacer()
                         VStack  (alignment: .leading, spacing: 10){
                             Circle()
                                 .frame(width: 5, height: 5)
@@ -211,6 +214,7 @@ struct DeliveryLocation: View {
                         .font(.system(size: 16))
                         .bold()
                 }
+                Spacer()
                 VStack {
                     Circle()
                         .frame(width: 5, height: 5)
@@ -237,6 +241,7 @@ struct DeliveryLocation: View {
                         .font(.system(size: 16))
                         .bold()
                 }
+                Spacer()
                 VStack {
                     Circle()
                         .frame(width: 5, height: 5)

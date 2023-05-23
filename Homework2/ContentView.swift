@@ -9,9 +9,14 @@ import SwiftUI
 
 
 struct ContentView: View {
-    
+    @State var selectIndex: Int = 0
     @State var textFromTF: String = ""
-  
+    var iconArray: [Image] = [Image(systemName: "line.horizontal.3.decrease"),
+                            Image("image4"),
+                              Image("image5"),
+                              Image("image6"),
+                              Image("image7")]
+    var iconTitle: [String] = ["Delivery", "Take Away Food", "Bell Service", "Delivery", "Price"]
     
     var body: some View {
         ZStack  {
@@ -19,9 +24,22 @@ struct ContentView: View {
                 .ignoresSafeArea()
             ScrollView(showsIndicators: false) {
                 
-                VStack(alignment: .leading, spacing: 10) {
+                VStack(alignment: .leading, spacing: 7) {
                     NavBarView()
-                    DeliveryMenu()
+                    
+                    HStack {
+                        ForEach(0..<5) { index in
+                            HorizontalSliderView(image: iconArray[index],
+                                                 title: iconTitle[index], isSelect: selectIndex == index)
+                            .padding()
+                            .onTapGesture {
+                                selectIndex = index
+                            }
+                            
+                            
+                        }
+                        
+                    }
                     Text("56 stores open")
                     
                     
@@ -59,7 +77,7 @@ struct ContentView_Previews: PreviewProvider {
 struct NavBarView: View {
     @State private var showNextScreen = false
     var body: some View {
-        HStack {
+        HStack (alignment: .center) {
             Button {
                 //
             } label: {
@@ -70,17 +88,18 @@ struct NavBarView: View {
                         .foregroundColor(.black)
                 }
             }
-            .padding(.all)
+            .padding(.trailing, 100)
             Spacer()
             Button {
                 self.showNextScreen = true
             } label: {
                 VStack {
                     Text("Delivering to")
-                    
+                        .foregroundColor(.gray)
                     HStack {
                         NavigationLink(destination: ThirdView()) {
                             Text ("ManasAve")
+                                .foregroundColor(.black)
                             Image(systemName: "square.and.arrow.down.fill")
                             
                         }
@@ -330,10 +349,8 @@ struct MenuDetail: View {
 }
 
 struct TabBar: View {
-    
-    
     var body: some View {
-        VStack (spacing: 20) {
+        VStack {
             TabView {
                 Text("Home")
                     .tabItem {
@@ -341,13 +358,14 @@ struct TabBar: View {
                         Text("Home")
                         Color.black
                     }
-                
+                    .padding()
                 Text("Wallet")
                     .tabItem {
                         Image(systemName: "creditcard")
                         Text("Wallet")
                         Color.black
                     }
+                    .padding()
                 
                 Text("Comment")
                     .tabItem {
@@ -356,6 +374,7 @@ struct TabBar: View {
                         Text("Comment")
                         Color.black
                     }
+                    .padding()
                 
                 Text("Profile")
                     .tabItem {
@@ -363,122 +382,47 @@ struct TabBar: View {
                         Text("Profile")
                         Color.black
                     }
+                    .padding()
             }
            
             .background(Color.black)
             
         }
+        .background(Color.black)
         .foregroundColor(.black)
         .frame(width: 335, height: 75)
         .background(Color.black)
         .cornerRadius(20)
         Spacer()
-        .padding(.vertical)
+      
     }
       
 }
 
 
-struct DeliveryMenu: View {
-    @State private var showAlert = false
+struct HorizontalSliderView: View {
+    var image: Image
+    var title: String
+    var isSelect: Bool
+    
     var body: some View {
-        HStack(spacing: 12) {
-            VStack{
-                Button {
-                    //
-                } label: {
-                    VStack {
-                        Image(systemName: "minus")
-                            .resizable()
-                            .frame(width: 14, height: 1)
-                            .foregroundColor(.white)
-                            .cornerRadius(1)
-                        Image(systemName: "minus")
-                            .resizable()
-                            .frame(width: 13, height: 1)
-                            .foregroundColor(.white)
-                            .cornerRadius(1)
-                        
-                        Image(systemName: "minus")
-                            .resizable()
-                            .frame(width: 13, height: 1)
-                            .foregroundColor(.white)
-                            .cornerRadius(1)
-                    }
-                    Text("Delivery")
-                        .font(.system(size: 10))
-                        .foregroundColor(.white)
-                }
-                .padding(.all)
-                .background(Color.black)
-                .cornerRadius(30)
-                .shadow(radius: 3)
-                .frame(width: 98, height: 47)
-                
-            }
+        HStack {
+            image
+                .resizable()
+                .frame(width: 20, height: 20)
+                .foregroundColor(isSelect ? .white : .black)
             
-            VStack {
-                Button {
-                 showAlert = true
-                } label: {
-                    Image("image4")
-                    Text("Menu")
-                      
-                    
-                }
+            if isSelect {
+                Text(title)
+                    .font(.system(size: 12))
+                    .foregroundColor(.white)
             }
-            .padding(.all)
-            .background(Color.white)
-            .cornerRadius(20)
-            .shadow(radius: 3)
-            .frame(width: 50, height: 47)
-            
-            VStack (spacing: 14) {
-                Button {
-                    //
-                } label: {
-                    Text("Hot meals")
-                    Image("image5")
-                }
-            }
-            .padding(.all)
-            .background(Color.white)
-            .cornerRadius(20)
-            .shadow(radius: 3)
-            .frame(width: 50, height: 47)
-            
-            VStack(spacing: 10) {
-                Button {
-                    //
-                } label: {
-                    Text("Delivery")
-                    Image("image6")
-                }
-            }
-            .padding(.all)
-            .background(Color.white)
-            .cornerRadius(20)
-            .shadow(radius: 3)
-            .frame(width: 50, height: 47)
-            
-            VStack(spacing: 20) {
-                Button {
-                    //
-                } label: {
-                    Text("Discount")
-                    Image("image7")
-                    Text("%")
-                        .font(.system(size: 15))
-                        .foregroundColor(.white)
-                }
-            }
-            .padding(.all)
-            .background(Color.white)
-            .cornerRadius(20)
-            .shadow(radius: 3)
-            .frame(width: 50, height: 47)
-            
         }
-        .padding(.all)
+        .frame(width: isSelect ? 100 : 30, height: 40)
+        .background(isSelect ? .gray : .clear)
+        .foregroundColor(isSelect ? .white : .black)
+        .cornerRadius(10)
+        
+        
     }
 }

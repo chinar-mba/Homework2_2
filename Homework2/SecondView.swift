@@ -22,7 +22,3 @@ struct SecondView_Previews: PreviewProvider {
     }
 }
 
-
-
-
-
